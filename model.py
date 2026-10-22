@@ -25,10 +25,6 @@ class ResNet9(nn.Module):
         self.conv4 = ConvBlock(256, 512, pool=True) # out_dim : 512 x 4 x 44
         self.res2 = nn.Sequential(ConvBlock(512, 512), ConvBlock(512, 512))
         
-        self.classifier = nn.Sequential(nn.MaxPool2d(4),
-                                       nn.Flatten(),
-                                       nn.Linear(512, num_diseases))
-        
     def forward(self, xb): # xb is the loaded batch
         out = self.conv1(xb)
         out = self.conv2(out)
